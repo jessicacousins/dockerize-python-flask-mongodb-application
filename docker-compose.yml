@@ -1,0 +1,31 @@
+version: "3"
+services:
+  datastore:
+    image: mongo:4.4
+    ports:
+      - "27017:27017"
+
+  pythonfrontend:
+    build: .
+    command: python -u app.py
+    volumes:
+      - ./src:/todo
+    ports:
+      - "5000:5000"
+    depends_on:
+      - datastore
+
+
+      
+# datastore:
+#   image: mongo:3.0.2
+#   ports:
+#     - "27017:27017"
+# pythonfrontend:
+#   build: .
+#   command: python -u app.py
+#   volumes:
+#     - ./src:/todo
+#   ports:
+#     - "5000:5000"
+
